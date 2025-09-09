@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<section class="dashboard">
+    <header class="dashboard__header">
+        <h1 class="dashboard__title">🛠 Admin Dashboard</h1>
+        <p class="dashboard__subtitle">Manage your retail system efficiently</p>
+    </header>
+
+    <div class="dashboard__grid">
+        <!-- Manage Products -->
+        <a asp-action="AddProduct" class="card-link">
+            <div class="card">
+                <div class="card__icon">📦</div>
+                <div class="card__content">
+                    <h3>Manage Products</h3>
+                    <p>View, add, and update product details in Azure Tables.</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- Manage Employees -->
+        <a asp-controller="Admin" asp-action="ManageAdmins" class="card-link">
+            <div class="card">
+                <div class="card__icon">👥</div>
+                <div class="card__content">
+                    <h3>Manage Employees</h3>
+                    <p>Add, edit, or remove employee profiles.</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- Manage Customers -->
+        <a asp-controller="Admin" asp-action="ManageCustomers" class="card-link">
+            <div class="card">
+                <div class="card__icon">🧑‍🤝‍🧑</div>
+                <div class="card__content">
+                    <h3>Manage Customers</h3>
+                    <p>Add, edit, or remove customer profiles.</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- Manage Inventory -->
+        <a asp-controller="Admin" asp-action="ManageInventory" class="card-link">
+            <div class="card">
+                <div class="card__icon">📦</div>
+                <div class="card__content">
+                    <h3>Manage Inventory</h3>
+                    <p>Track and control product stock and pricing.</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- Monitor Orders -->
+        <a asp-controller="Storage" asp-action="Queues" class="card-link">
+            <div class="card">
+                <div class="card__icon">📨</div>
+                <div class="card__content">
+                    <h3>Monitor Orders</h3>
+                    <p>Track and process order messages via Azure Queues.</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- View Logs -->
+        <a asp-controller="Admin" asp-action="Logs" class="card-link">
+            <div class="card">
+                <div class="card__icon">🗂</div>
+                <div class="card__content">
+                    <h3>View Logs</h3>
+                    <p>Check logs and diagnostics stored in Azure.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AbcRetailer.Models.CustomerProfile>
+@{
+    ViewData["Title"] = "Manage Customers";
+}
+
+<h2>Manage Customers</h2>
+<a asp-action="AddCustomer" class="btn btn-success">Add New Customer</a>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.Name</td>
+                <td>@customer.Email</td>
+                <td>
+                    <a asp-action="EditCustomer" asp-route-rowKey="@customer.RowKey" class="btn btn-primary">Edit</a>
+                    <form asp-action="DeleteCustomer" method="post" style="display:inline;">
+                        <input type="hidden" name="rowKey" value="@customer.RowKey" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

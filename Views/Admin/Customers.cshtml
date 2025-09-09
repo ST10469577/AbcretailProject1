@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AbcRetailer.Models.CustomerProfile>
+@{
+    ViewData["Title"] = "Manage Customers";
+}
+
+<h2>Manage Customers</h2>
+
+<!-- Add Customer Form -->
+<form asp-action="AddCustomer" method="post" class="mb-4">
+    <div class="mb-2">
+        <input type="text" name="Name" placeholder="Full Name" required class="form-control" />
+    </div>
+    <div class="mb-2">
+        <input type="email" name="Email" placeholder="Email" required class="form-control" />
+    </div>
+    <div class="mb-2">
+        <input type="text" name="Address" placeholder="Address" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Add Customer</button>
+</form>
+
+<!-- Customer Table -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cust in Model)
+        {
+            <tr>
+                <td>@cust.Name</td>
+                <td>@cust.Email</td>
+                <td>@cust.Address</td>
+                <td>
+                    <a asp-action="EditCustomer" asp-route-rowKey="@cust.RowKey" class="btn btn-primary btn-sm">Edit</a>
+                    <form asp-action="DeleteCustomer" method="post" style="display:inline;">
+                        <input type="hidden" name="rowKey" value="@cust.RowKey" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

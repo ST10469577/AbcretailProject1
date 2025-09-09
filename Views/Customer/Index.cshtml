@@ -1,0 +1,44 @@
+﻿@model IEnumerable<AbcRetailer.Models.CustomerProfile>
+@{
+    ViewData["Title"] = "Customer Dashboard";
+}
+
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<section class="dashboard">
+    <header class="dashboard__header">
+        <h2>👤 Customer Dashboard</h2>
+        <a asp-action="Create" class="btn btn--primary">+ Add Customer</a>
+    </header>
+
+    <div class="dashboard__card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    foreach (var c in Model)
+                    {
+                        <tr>
+                            <td>@c.Name</td>
+                            <td>@c.Email</td>
+                            <td>@c.Address</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="empty">No customers found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -1,0 +1,68 @@
+﻿@model List<string>
+@{
+    ViewData["Title"] = "Logs";
+}
+
+<section class="container mt-4">
+    <header class="mb-3">
+        <h2 class="fw-bold text-primary">🗂 System Logs</h2>
+        <p class="text-muted">Review and download available system log files.</p>
+    </header>
+
+    <!-- Date filter -->
+    <form asp-action="ViewLogs" method="post" class="mb-3 row g-2 align-items-end">
+        <div class="col-auto">
+            <label for="date" class="form-label">Select Date</label>
+            <input type="date" id="date" name="date" class="form-control" required />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">View Logs</button>
+        </div>
+    </form>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No logs found.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive shadow-sm rounded">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">📄 Log File</th>
+                        <th scope="col" class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var log in Model)
+                    {
+                        <tr>
+                            <td>@log</td>
+                            <td class="text-center">
+                                <a asp-action="DownloadLogs" asp-route-date="@log"
+                                   class="btn btn-sm btn-outline-primary">
+                                    ⬇ Download
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @if (ViewBag.SelectedDate != null && ViewBag.LogContent != null)
+    {
+        <div class="mt-4 p-3 bg-light border rounded">
+            <h5>Logs for @ViewBag.SelectedDate</h5>
+            <pre style="max-height:400px; overflow:auto;">@ViewBag.LogContent</pre>
+            <form asp-action="DownloadLogs" method="post" class="mt-2">
+                <input type="hidden" name="date" value="@ViewBag.SelectedDate" />
+                <button type="submit" class="btn btn-success btn-sm">⬇ Download This Log</button>
+            </form>
+        </div>
+    }
+</section>

@@ -1,0 +1,26 @@
+﻿@model AbcRetailer.Models.AdminProfile
+
+<div class="login-container">
+    <h2 class="text-primary">Register Admin</h2>
+
+    <form asp-controller="Admin" asp-action="Register" method="post">
+        <div class="form-group mb-3">
+            <label asp-for="Username" class="form-label"></label>
+            <input asp-for="Username" class="form-control" required />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" type="password" class="form-control" required />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Register</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <p>Already have an account?</p>
+        <a asp-controller="Admin" asp-action="Login" class="btn btn-secondary">Back to Login</a>
+    </div>
+</div>

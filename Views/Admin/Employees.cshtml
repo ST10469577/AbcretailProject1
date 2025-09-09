@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AbcRetailer.Models.EmployeeProfile>
+@{
+    ViewData["Title"] = "Manage Employees";
+}
+
+<h2>Manage Employees</h2>
+
+<!-- Add Employee Form -->
+<form asp-action="AddEmployee" method="post" class="mb-4">
+    <div class="mb-2">
+        <input type="text" name="Name" placeholder="Full Name" required class="form-control" />
+    </div>
+    <div class="mb-2">
+        <input type="email" name="Email" placeholder="Email" required class="form-control" />
+    </div>
+    <div class="mb-2">
+        <input type="text" name="Position" placeholder="Position" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Add Employee</button>
+</form>
+
+<!-- Employee Table -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Position</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.Name</td>
+                <td>@emp.Email</td>
+                <td>@emp.Position</td>
+                <td>
+                    <a asp-action="EditEmployee" asp-route-rowKey="@emp.RowKey" class="btn btn-primary btn-sm">Edit</a>
+                    <form asp-action="DeleteEmployee" method="post" style="display:inline;">
+                        <input type="hidden" name="rowKey" value="@emp.RowKey" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,77 @@
+﻿@model List<AbcRetailer.Models.ProductEntity>
+@{
+    ViewData["Title"] = "Customer Dashboard";
+}
+
+<section class="container mt-4">
+    <header class="mb-4">
+        <h2 class="fw-bold text-primary">🛒 Online Store</h2>
+        <p class="text-muted">Browse products uploaded by the admin.</p>
+
+        @* Display TempData messages *@
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Message"]
+            </div>
+        }
+    </header>
+
+    <!-- Category Filter -->
+    <form method="get" class="mb-4">
+        <label for="categorySelect" class="form-label">Filter by Category:</label>
+        <select id="categorySelect" name="category" class="form-select" onchange="this.form.submit()">
+            <option value="">All Categories</option>
+            @foreach (var cat in ViewBag.Categories as List<string>)
+            {
+                var isSelected = ViewBag.SelectedCategory != null && ViewBag.SelectedCategory == cat ? "selected" : "";
+                <option value="@cat" (isSelected)>@cat</option>
+            }
+        </select>
+    </form>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No products available in this category.
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        @if (!string.IsNullOrEmpty(product.ImageUrl))
+                        {
+                            <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="max-height:200px; object-fit:cover;" />
+                        }
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text flex-grow-1">@product.Description</p>
+                            <p class="card-text fw-bold">Price: R@(product.Price.ToString("F2"))</p>
+
+                            <!-- Add to Cart Form -->
+                            <form method="post" asp-controller="Cart" asp-action="AddToCart">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="productId" value="@product.RowKey" />
+                                <input type="hidden" name="productName" value="@product.Name" />
+                                <input type="hidden" name="price" value="@product.Price" />
+                                <button type="submit" class="btn btn-primary mt-auto">Add to Cart</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Checkout Button -->
+        <div class="mt-4 text-end">
+            <form method="get" asp-controller="Cart" asp-action="Checkout">
+                <button type="submit" class="btn btn-success btn-lg">Proceed to Checkout 🛒</button>
+            </form>
+        </div>
+    }
+</section>

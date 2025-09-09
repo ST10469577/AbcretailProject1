@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AbcRetailer.Models.AdminProfile>
+@{
+    ViewData["Title"] = "Manage Admins";
+}
+
+<h2>Manage Admins</h2>
+<a asp-action="AddAdmin" class="btn btn-success mb-2">Add New Admin</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Full Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var admin in Model)
+        {
+            <tr>
+                <td>@admin.Username</td>
+                <td>@admin.FullName</td>
+                <td>
+                    <a asp-action="EditAdmin" asp-route-rowKey="@admin.RowKey" class="btn btn-primary btn-sm">Edit</a>
+                    <form asp-action="DeleteAdmin" method="post" style="display:inline;">
+                        <input type="hidden" name="rowKey" value="@admin.RowKey" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,31 @@
+﻿@model List<string>
+@{
+    ViewData["Title"] = "View Logs";
+}
+
+<section class="container mt-4">
+    <header class="mb-4">
+        <h2 class="fw-bold text-primary">🗂 System Logs</h2>
+        <p class="text-muted">Check logs stored in Azure File Share.</p>
+    </header>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No logs available.
+        </div>
+    }
+    else
+    {
+        <ul class="list-group">
+            @foreach (var logFileName in Model)
+            {
+                <li class="list-group-item">
+                    <a asp-controller="Admin" asp-action="DownloadLog" asp-route-fileName="@logFileName">
+                        @logFileName
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+</section>

@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg rounded-3 border-0">
+        <div class="card-body p-4">
+            <h2 class="mb-3 text-primary">Admin Dashboard</h2>
+            <p class="text-muted">Welcome, @TempData["Admin"] 👋</p>
+
+            <hr />
+
+            <div class="row g-4">
+                <!-- Manage Employees -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Manage Employees</h5>
+                            <p class="card-text">Add, edit, or remove employee profiles.</p>
+                            <a asp-controller="Admin" asp-action="ManageAdmins" class="btn btn-outline-primary">Go</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manage Customers -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Manage Customers</h5>
+                            <p class="card-text">Add, edit, or remove customer profiles.</p>
+                            <a asp-controller="Admin" asp-action="ManageCustomers" class="btn btn-outline-success">Go</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manage Inventory -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Manage Inventory</h5>
+                            <p class="card-text">Track and control product stock and pricing.</p>
+                            <a asp-controller="Admin" asp-action="ManageInventory" class="btn btn-outline-warning">Go</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Settings -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">System Settings</h5>
+                            <p class="card-text">Update configurations and manage access control.</p>
+                            <a asp-controller="Admin" asp-action="Settings" class="btn btn-outline-dark">Go</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Logs -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">System Logs</h5>
+                            <p class="card-text">View and download system activity logs.</p>
+                            <a asp-controller="Admin" asp-action="Logs" class="btn btn-outline-info">Go</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 text-end">
+                <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>

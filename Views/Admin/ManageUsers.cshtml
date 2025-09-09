@@ -1,0 +1,70 @@
+﻿@model AbcRetailer.Models.ManageUsersViewModel
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<section class="dashboard">
+    <header class="dashboard__header">
+        <h2>👥 Manage Users</h2>
+        <p class="text-muted">Create, edit, and delete Admin and Customer profiles.</p>
+    </header>
+
+    <div class="dashboard__grid">
+        <!-- Admins -->
+        <div class="card shadow-sm">
+            <h3>Admins</h3>
+            <form asp-action="AddAdmin" method="post" class="mb-3">
+                <input type="text" name="Username" placeholder="Username" required class="form-control mb-2" />
+                <input type="text" name="FullName" placeholder="Full Name" required class="form-control mb-2" />
+                <input type="email" name="Email" placeholder="Email" required class="form-control mb-2" />
+                <button type="submit" class="btn btn-success w-100">➕ Add Admin</button>
+            </form>
+
+            <ul class="user-list list-unstyled">
+                @foreach (var admin in Model.Admins)
+                {
+                    <li class="d-flex justify-content-between align-items-center border-bottom py-2">
+                        <span>@admin.Username (@admin.FullName)</span>
+                        <div>
+                            <a asp-action="EditAdmin" asp-route-id="@admin.RowKey" class="btn btn-warning btn-sm">Edit</a>
+                            <form asp-action="DeleteUser" method="post" style="display:inline;">
+                                <input type="hidden" name="partitionKey" value="Admin" />
+                                <input type="hidden" name="rowKey" value="@admin.RowKey" />
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Customers -->
+        <div class="card">
+            <h3>Customers</h3>
+            <form asp-action="AddCustomer" method="post">
+                <input type="text" name="Name" placeholder="Full Name" required class="form-control" />
+                <input type="email" name="Email" placeholder="Email" required class="form-control" />
+                <input type="text" name="Address" placeholder="Address" class="form-control" />
+                <button type="submit" class="btn btn-success btn-block">Add Customer</button>
+            </form>
+
+            <ul class="user-list">
+                @foreach (var cust in Model.Customers)
+                {
+                    <li>
+                        @cust.Name (@cust.Email)
+                        <form asp-action="DeleteUser" method="post" style="display:inline;">
+                            <input type="hidden" name="partitionKey" value="Customer" />
+                            <input type="hidden" name="rowKey" value="@cust.RowKey" />
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </li>
+                }
+            </ul>
+        </div>
+        l>
+        </div>
+    </div>
+</section>

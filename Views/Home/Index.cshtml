@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "ABC Retailer — Smart, Scalable Commerce";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // keep if you're using a shared layout
+}
+
+<link rel="stylesheet" href="~/css/landing.css" />
+
+<section class="hero">
+    <div class="container hero__grid">
+        <div class="hero__left">
+            <h1 class="hero__title">Fast. Reliable. Cloud-Ready Retail.</h1>
+            <p class="hero__subtitle">
+                ABC Retailer runs on scalable Azure storage—snappy product browsing, resilient orders,
+                and media that loads in a blink.
+            </p>
+            <div class="hero__cta">
+                <a class="btn btn--primary" asp-controller="Customer" asp-action="Dashboard">Shop Now</a>
+                <a class="btn btn--ghost" asp-controller="Admin" asp-action="Login">Admin Portal</a>
+            </div>
+            <div class="hero__badges">
+                <span class="badge">Azure Tables</span>
+                <span class="badge">Azure Blob Storage</span>
+                <span class="badge">Azure Queues</span>
+                <span class="badge">Azure Files</span>
+            </div>
+        </div>
+        <div class="hero__right">
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat__value">99.9%</div>
+                    <div class="stat__label">Uptime Target</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__value">x∞</div>
+                    <div class="stat__label">Scales with demand</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__value">MS</div>
+                    <div class="stat__label">Low-latency media</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero__wave" aria-hidden="true"></div>
+</section>
+
+<footer class="footer">
+    <div class="container footer__grid">
+        <div class="footer__brand">AbcRetailer</div>
+        <nav class="footer__nav" aria-label="Footer">
+            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <a asp-controller="Home" asp-action="About">About</a>
+            <a asp-controller="Home" asp-action="Contact">Contact</a>
+        </nav>
+        <div class="footer__copy">© @DateTime.UtcNow.Year AbcRetailer</div>
+    </div>
+</footer>

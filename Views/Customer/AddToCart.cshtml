@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Add To Cart";
+    var productId = ViewBag.ProductId as string;
+}
+
+<h2>Product Added to Cart</h2>
+
+@if (!string.IsNullOrEmpty(productId))
+{
+    <p>✅ Product <strong>@productId</strong> has been successfully added to your cart.</p>
+}
+else if (TempData["Message"] != null)
+{
+    <p>✅ @TempData["Message"]</p>
+}
+else
+{
+    <p>⚠️ No product information was received.</p>
+}
+
+<div>
+    <a asp-controller="Customer" asp-action="Dashboard" class="btn btn-primary">🔙 Continue Shopping</a>
+    <a asp-controller="Cart" asp-action="ViewCart" class="btn btn-success">🛒 View Cart</a>
+</div>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AbcRetailer.Models.ProductEntity>
+@{
+    ViewData["Title"] = "Manage Inventory";
+}
+
+<h2>Manage Inventory</h2>
+
+<!-- Add Product Form -->
+<form asp-action="AddProduct" method="post" enctype="multipart/form-data" class="mb-4">
+    <input type="text" name="Name" placeholder="Product Name" required class="form-control mb-2" />
+    <input type="text" name="Description" placeholder="Description" class="form-control mb-2" />
+    <input type="number" name="Price" placeholder="Price" step="0.01" class="form-control mb-2" />
+    <input type="file" name="ImageFile" class="form-control mb-2" />
+    <button type="submit" class="btn btn-success">Add Product</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price.ToString("C")</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(product.ImageUrl))
+                    {
+                        <img src="@product.ImageUrl" width="80" />
+                    }
+                </td>
+                <td>
+                    <a asp-action="EditProduct" asp-route-rowKey="@product.RowKey" class="btn btn-primary btn-sm">Edit</a>
+                    <form asp-action="DeleteProduct" method="post" style="display:inline;">
+                        <input type="hidden" name="rowKey" value="@product.RowKey" />
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
